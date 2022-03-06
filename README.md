@@ -6,3 +6,5 @@
 ![Windows 10 | 11](https://img.shields.io/badge/Windows-10_|_11-6479ff.svg)
 
 秀丸のアウトプット内に、一時的なプロンプトを表示しようとするものです。
+
+https://秀丸マクロ.net/?page=nobu_tool_hm_prompt
