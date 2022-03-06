@@ -339,6 +339,9 @@ internal partial class HmPromptForm
     [DllImport("user32.dll")]
     static extern IntPtr GetActiveWindow();
 
+    [DllImport("user32.dll")]
+    static extern IntPtr GetTopWindow(IntPtr hWnd);
+
     [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
     static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 

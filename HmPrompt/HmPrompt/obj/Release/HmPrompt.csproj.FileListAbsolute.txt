@@ -22,3 +22,4 @@ G:\repogitory\hm_prompt\HmPrompt\HmPrompt\bin\Release\hm.NET.dll
 G:\repogitory\hm_prompt\HmPrompt\HmPrompt\obj\Release\HmPrompt.csproj.CoreCompileInputs.cache
 G:\repogitory\hm_prompt\HmPrompt\HmPrompt\obj\Release\HmPrompt.csproj.CopyComplete
 G:\repogitory\hm_prompt\HmPrompt\HmPrompt\obj\Release\HmPrompt.dll
+G:\repogitory\hm_prompt\HmPrompt\HmPrompt\obj\Release\HmPrompt.csprojAssemblyReference.cache
