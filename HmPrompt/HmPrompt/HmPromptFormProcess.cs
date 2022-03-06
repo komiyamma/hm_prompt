@@ -22,6 +22,8 @@ internal partial class HmPromptForm
     int iPrevOutputPaneWidth = -1;
     int iPrevOutputPaneHeight = -1;
 
+    long iTickCount = 0;
+
     void ResetPrevAttr()
     {
         iPrevOutputPaneWidth = -1;
@@ -115,6 +117,16 @@ internal partial class HmPromptForm
             prevTopWindowHandle = topWinndowHandle;
         }
 
+        iTickCount++;
+        if (iTickCount % 5 != 1)
+        {
+            return;
+        }
+        if (iTickCount == long.MaxValue)
+        {
+            iTickCount = 0;
+        }
+
         // アウトプット枠を探す。
         IntPtr hWndOutputPane = FindWindowEx(hWndHidemaru, IntPtr.Zero, "HM32OutputPane", IntPtr.Zero);
         GetWindowRect(hWndOutputPane, out rectOutputPane);
@@ -176,7 +188,7 @@ internal partial class HmPromptForm
 
             if (iPrevOutputPaneWidth == iOutputPaneWidth && iPrevOutputPaneHeight == iOutputPaneHeight)
             {
-                    this.timer.Interval = 500;
+                    this.timer.Interval = 200;
             }
 
             iPrevOutputPaneWidth = iOutputPaneWidth;
