@@ -20,6 +20,11 @@ internal partial class HmPromptForm
     int iPrevOutputPaneWidth = -1;
     int iPrevOutputPaneHeight = -1;
 
+    void ResetPrevAttr()
+    {
+        iPrevOutputPaneWidth = -1;
+        iPrevOutputPaneHeight = -1;
+    }
 
 
     void InitProcessAttr()
@@ -135,7 +140,7 @@ internal partial class HmPromptForm
             // 秀丸内で、アウトプット枠は、TopやBottomにくっついているなら
             if (IsHmOutputPaneIsBottomOrTop())
             {
-                if (iPrevOutputPaneWidth != iOutputPaneWidth || iPrevOutputPaneHeight != iOutputPaneHeight) {
+                // if (iPrevOutputPaneWidth != iOutputPaneWidth || iPrevOutputPaneHeight != iOutputPaneHeight) {
 
                     int original_height = rectOutputPaneServer.Bottom - rectOutputPaneServer.Top;
 
@@ -143,22 +148,25 @@ internal partial class HmPromptForm
                     SetWindowPos(hWndOutputPaneServer, IntPtr.Zero, 0, 0, iOutputPaneWidth / 2, original_height, SWP_NOMOVE);
                     // プロンプトはその右に配置
                     SetWindowPos(processWindowHandle, IntPtr.Zero, iOutputPaneWidth / 2 + 3, 3, iOutputPaneWidth / 2 - 5, original_height - 3, uFlags);
-                }
+                // }
             }
             // 秀丸内で、アウトプット枠は、LeftやRightにくっついている
             else
             {
-                if (iPrevOutputPaneWidth != iOutputPaneWidth || iPrevOutputPaneHeight != iOutputPaneHeight)
-                {
+                // if (iPrevOutputPaneWidth != iOutputPaneWidth || iPrevOutputPaneHeight != iOutputPaneHeight) {
 
                     int original_width = rectOutputPaneServer.Right - rectOutputPaneServer.Left;
                     // アウトプット枠は、上半分ぐらいにして
                     SetWindowPos(hWndOutputPaneServer, IntPtr.Zero, 0, 0, original_width, iOutputPaneHeight / 2, SWP_NOMOVE);
                     // プロンプトはその下に配置
                     SetWindowPos(processWindowHandle, IntPtr.Zero, 3, iOutputPaneHeight / 2 + 5, original_width - 5, iOutputPaneHeight / 2 - 6, uFlags);
-                }
+                // }
             }
 
+            if (iPrevOutputPaneWidth == iOutputPaneWidth && iPrevOutputPaneHeight == iOutputPaneHeight)
+            {
+                    this.timer.Interval = 500;
+            }
             iPrevOutputPaneWidth = iOutputPaneWidth;
             iPrevOutputPaneHeight = iOutputPaneHeight;
 
@@ -227,6 +235,7 @@ internal partial class HmPromptForm
 
             if (process.HasExited)
             {
+                ResetPrevAttr();
                 RevertOutputPaneServerLocation();
                 this.Close();
                 return;
